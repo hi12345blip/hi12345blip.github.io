@@ -1,42 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>My Game Portal</title>
+  <title>VortexPlay</title>
+
   <style>
+
     body {
-      background: #111;
+      background: #0f0f0f;
       color: white;
-      text-align: center;
       font-family: Arial;
+      text-align: center;
     }
-    .game {
-      margin: 20px;
-      padding: 20px;
-      background: #222;
-      border-radius: 10px;
+
+    h1 {
+      font-size: 60px;
     }
+
     button {
-      padding: 10px 20px;
-      background: lime;
+      background: purple;
+      color: white;
       border: none;
-      border-radius: 5px;
+      padding: 15px 30px;
+      border-radius: 15px;
+      font-size: 20px;
       cursor: pointer;
+
+      transition: 0.3s;
     }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px purple;
+    }
+
   </style>
 </head>
+
 <body>
 
-<h1>🎮 My Game Portal</h1>
+  <h1>🎮 VortexPlay</h1>
 
-<div class="game">
-  <h2>Game 1</h2>
-  <button onclick="alert('Launch game here')">Play</button>
-</div>
-
-<div class="game">
-  <h2>Game 2</h2>
-  <button onclick="alert('Launch game here')">Play</button>
-</div>
+  <button>Play Game</button>
 
 </body>
 </html>
