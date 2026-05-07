@@ -2,124 +2,231 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>VortexPlay Games</title>
+<meta charset="UTF-8">
+<title>VortexPlay</title>
 
-  <style>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: #0b0b0b;
-      color: white;
-      text-align: center;
-    }
+<style>
 
-    h1 {
-      margin-top: 30px;
-      font-size: 40px;
-    }
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: #0a0a0a;
+  color: white;
+  overflow-x: hidden;
+}
 
-    /* GAME GRID */
-    .grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 30px;
-    }
+/* BACKGROUND */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
 
-    .game {
-      background: #1a1a1a;
-      width: 180px;
-      padding: 15px;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+/* HEADER */
+.header {
+  text-align: center;
+  font-size: 45px;
+  padding: 20px;
+  text-shadow: 0 0 20px purple;
+}
 
-    .game:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px purple;
-    }
+/* TOP BAR */
+.topbar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 
-    .game img {
-      width: 100%;
-      border-radius: 10px;
-    }
+input {
+  width: 50%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
 
-    /* GAME WINDOW */
-    #gameFrame {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-    }
+/* COINS */
+.coins {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.5);
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid purple;
+}
 
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+/* GRID */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+}
 
-    .closeBtn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: red;
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      z-index: 10;
-    }
+/* GAME CARD */
+.card {
+  width: 180px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 15px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+}
 
-  </style>
+.card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px purple;
+}
+
+/* BUTTONS */
+button {
+  margin-top: 10px;
+  background: purple;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* GAME WINDOW */
+#gameBox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: red;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+/* FADE */
+.fade {
+  animation: fade 1s ease-in;
+}
+
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+</style>
 </head>
 
 <body>
 
-<h1>🎮 VortexPlay Games</h1>
+<!-- BACKGROUND -->
+<div id="particles-js"></div>
 
-<!-- GAME LIST -->
-<div class="grid">
+<!-- COINS -->
+<div class="coins">
+💰 Coins: <span id="coins">0</span>
+</div>
 
-  <div class="game" onclick="openGame('https://scratch.mit.edu/projects/105500895/embed')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Scratchlogo.svg">
-    <p>Scratch Game</p>
+<div class="header">🎮 VortexPlay Hub</div>
+
+<!-- SEARCH -->
+<div class="topbar">
+<input id="search" placeholder="Search games..." onkeyup="filterGames()">
+</div>
+
+<!-- GAMES -->
+<div class="grid" id="grid">
+
+  <div class="card fade" onclick="openGame('https://buildnow-gg.io/')">
+    <h3>BuildNow GG</h3>
+    <button onclick="addCoins(event, 10)">Play (+10💰)</button>
   </div>
 
-  <div class="game" onclick="openGame('https://games.crazygames.com/en_US/slope/index.html')">
-    <img src="https://img.crazygames.com/games/slope/cover-160x120.png">
-    <p>Slope</p>
+  <div class="card fade" onclick="openGame('https://games.crazygames.com/en_US/slope/index.html')">
+    <h3>Slope</h3>
+    <button onclick="addCoins(event, 10)">Play (+10💰)</button>
   </div>
 
-  <div class="game" onclick="openGame('https://games.crazygames.com/en_US/1v1-lol/index.html')">
-    <img src="https://img.crazygames.com/games/1v1-lol/cover-160x120.png">
-    <p>1v1.lol</p>
+  <div class="card fade" onclick="openGame('https://games.crazygames.com/en_US/temple-run-2/index.html')">
+    <h3>Temple Run 2</h3>
+    <button onclick="addCoins(event, 10)">Play (+10💰)</button>
   </div>
 
 </div>
 
 <!-- GAME PLAYER -->
-<div id="gameFrame">
-  <button class="closeBtn" onclick="closeGame()">X Close</button>
-  <iframe id="frame"></iframe>
+<div id="gameBox">
+<button class="close" onclick="closeGame()">X</button>
+<iframe id="frame"></iframe>
 </div>
+
+<!-- PARTICLES -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script>
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 60 },
+    color: { value: "#a020f0" },
+    size: { value: 3 },
+    move: { speed: 2 }
+  }
+});
+</script>
 
 <script>
 
-function openGame(url) {
-  document.getElementById("gameFrame").style.display = "block";
+/* COINS */
+let coins = localStorage.getItem("coins") || 0;
+document.getElementById("coins").innerText = coins;
+
+function addCoins(e, amount){
+  e.stopPropagation();
+  coins = Number(coins) + amount;
+  localStorage.setItem("coins", coins);
+  document.getElementById("coins").innerText = coins;
+}
+
+/* GAME OPEN */
+function openGame(url){
+  document.getElementById("gameBox").style.display = "block";
   document.getElementById("frame").src = url;
 }
 
-function closeGame() {
-  document.getElementById("gameFrame").style.display = "none";
+function closeGame(){
+  document.getElementById("gameBox").style.display = "none";
   document.getElementById("frame").src = "";
+}
+
+/* SEARCH */
+function filterGames(){
+  let input = document.getElementById("search").value.toLowerCase();
+  let cards = document.getElementsByClassName("card");
+
+  for(let i=0;i<cards.length;i++){
+    let text = cards[i].innerText.toLowerCase();
+    cards[i].style.display = text.includes(input) ? "block" : "none";
+  }
 }
 
 </script>
